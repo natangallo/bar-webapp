@@ -1,0 +1,146 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    color: black;
+}
+.container {
+    width: 90%;
+    margin: 0 auto;
+    padding: 20px;
+}
+.table-container {
+    overflow-x: auto;
+    overflow-y: auto;
+    max-width: 100%;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+th {
+    background-color: #f2f2f2;
+    color: black;
+}
+td {
+    color: black;
+}
+.buttons {
+    display: flex;
+    justify-content: space-between;
+}
+button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+button:hover {
+    background-color: #45a049;
+}
+.accordion {
+    cursor: pointer;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    background-color: #f2f2f2;
+    color: black;
+    margin-bottom: 5px;
+}
+.panel {
+    padding: 0 18px;
+    display: none;
+    background-color: white;
+    overflow: hidden;
+    color: black;
+}
+.logout-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.logout-btn:hover {
+    background-color: #c9302c;
+}
+.transaction-details {
+    display: none;
+    width: 100%;
+}
+.filter-input {
+    margin-bottom: 10px;
+    padding: 5px;
+    width: 100%;
+    max-width: 300px;
+}
+.header-buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+}
+.transaction-btn {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.transaction-btn:hover {
+    background-color: #0056b3;
+}
+.edit-fields {
+    display: none;
+}
+.edit-mode .edit-fields {
+    display: inline;
+}
+.edit-mode .static-fields {
+    display: none;
+}
+.add-product-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.add-product-form div {
+    flex: 1;
+    min-width: 200px;
+}
+.add-product-form button {
+    flex: 0 1 auto;
+}
+@media screen and (max-width: 768px) {
+    .buttons, .header-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    button, .transaction-btn, .logout-btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .table-container {
+        overflow-x: scroll;
+    }
+    .add-product-form {
+        flex-direction: column;
+    }
+}

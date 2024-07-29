@@ -63,125 +63,6 @@ $transactions = $pdo->query('SELECT * FROM transactions ORDER BY transaction_tim
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin</title>
     <link rel="stylesheet" href="css/admin-styles.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: white;
-            color: black;
-        }
-        .container {
-            width: 100%;
-            padding: 20px;
-        }
-        .table-container {
-            overflow-x: auto;
-            overflow-y: auto;
-            max-width: 100%;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: center;
-            background-color: rgba(255, 255, 255, 0.8);
-        }
-        th {
-            background-color: #f2f2f2;
-            color: black;
-        }
-        td {
-            color: black;
-        }
-        .buttons {
-            display: flex;
-            justify-content: space-between;
-        }
-        button {
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-        .accordion {
-            cursor: pointer;
-            padding: 10px;
-            width: 100%;
-            border: none;
-            text-align: left;
-            outline: none;
-            font-size: 15px;
-            background-color: #f2f2f2;
-            color: black;
-            margin-bottom: 5px;
-        }
-        .panel {
-            padding: 0 18px;
-            display: none;
-            background-color: white;
-            overflow: hidden;
-            color: black;
-        }
-        .logout-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            padding: 10px 20px;
-            background-color: #d9534f;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .logout-btn:hover {
-            background-color: #c9302c;
-        }
-        .transaction-details {
-            display: none;
-            width: 100%;
-        }
-        .filter-input {
-            margin-bottom: 10px;
-            padding: 5px;
-            width: 100%;
-            max-width: 300px;
-        }
-        .header-buttons {
-            display: flex;
-            justify-content: flex-end;
-            margin-bottom: 10px;
-        }
-        .transaction-btn {
-            padding: 10px 20px;
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .transaction-btn:hover {
-            background-color: #0056b3;
-        }
-        .edit-fields {
-            display: none;
-        }
-        .edit-mode .edit-fields {
-            display: inline;
-        }
-        .edit-mode .static-fields {
-            display: none;
-        }
-    </style>
 </head>
 <body>
     <div class="container">
@@ -217,16 +98,16 @@ $transactions = $pdo->query('SELECT * FROM transactions ORDER BY transaction_tim
                                 <form method="POST" action="admin.php" class="edit-form">
                                     <input type="hidden" name="id" value="<?php echo $product['id']; ?>">
                                     <span class="edit-fields">
-                                        <input type="number" name="price" value="<?php echo $product['price']; ?>" required>
-                                        <input type="number" name="stock_quantity" value="<?php echo $product['stock_quantity']; ?>" required>
-                                        <input type="text" name="customer_name" placeholder="Nome e Cognome" required>
+                                        <input type="number" name="price" value="<?php echo $product['price']; ?>" required disabled>
+                                        <input type="number" name="stock_quantity" value="<?php echo $product['stock_quantity']; ?>" required disabled>
+                                        <input type="text" name="customer_name" placeholder="Nome Cliente" required disabled>
                                     </span>
                                     <button type="button" class="edit-btn">Modifica</button>
-                                    <button type="submit" name="update_product" class="edit-fields">Salva</button>
+                                    <button type="submit" name="update_product" class="edit-fields" style="display:none;">Salva</button>
                                 </form>
                             </td>
                             <td>
-                                <button class="details-btn" onclick="toggleDetails(<?php echo $product['id']; ?>)">Dettagli</button>
+                                <button class="accordion" onclick="toggleDetails('<?php echo $product['id']; ?>')">Dettagli</button>
                             </td>
                         </tr>
                         <tr id="details-<?php echo $product['id']; ?>" class="transaction-details">
@@ -235,9 +116,9 @@ $transactions = $pdo->query('SELECT * FROM transactions ORDER BY transaction_tim
                                     <table>
                                         <thead>
                                             <tr>
-                                                <th>ID</th>
+                                                <th>ID Transazione</th>
                                                 <th>Quantità</th>
-                                                <th>Data e Ora</th>
+                                                <th>Data</th>
                                                 <th>Nome Cliente</th>
                                             </tr>
                                         </thead>
@@ -263,7 +144,7 @@ $transactions = $pdo->query('SELECT * FROM transactions ORDER BY transaction_tim
         </div>
 
         <h2>Aggiungi Prodotto</h2>
-        <form method="POST" action="admin.php">
+        <form method="POST" action="admin.php" class="add-product-form">
             <div>
                 <label for="name">Nome:</label>
                 <input type="text" id="name" name="name" required>
@@ -322,7 +203,29 @@ $transactions = $pdo->query('SELECT * FROM transactions ORDER BY transaction_tim
         document.querySelectorAll('.edit-btn').forEach(button => {
             button.addEventListener('click', () => {
                 const form = button.closest('.edit-form');
+                const fields = form.querySelectorAll('.edit-fields input');
                 form.classList.toggle('edit-mode');
+
+                fields.forEach(field => {
+                    field.disabled = !form.classList.contains('edit-mode');
+                });
+
+                button.style.display = form.classList.contains('edit-mode') ? 'none' : 'inline-block';
+                form.querySelector('button[type="submit"]').style.display = form.classList.contains('edit-mode') ? 'inline-block' : 'none';
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.transaction-details').forEach(details => {
+                details.style.display = 'none';
+            });
+            document.querySelectorAll('.edit-form').forEach(form => {
+                form.classList.remove('edit-mode');
+                form.querySelectorAll('.edit-fields input').forEach(field => {
+                    field.disabled = true;
+                });
+                form.querySelector('.edit-btn').style.display = 'inline-block';
+                form.querySelector('button[type="submit"]').style.display = 'none';
             });
         });
     </script>

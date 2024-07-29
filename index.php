@@ -117,13 +117,44 @@ $bibite = array_filter($products, function($product) {
             width: 100%;
             box-sizing: border-box;
         }
-        .admin-link {
+        /* Hamburger menu styles */
+        .menu-btn {
+            display: block;
             position: absolute;
             top: 20px;
             right: 20px;
             background-color: #f44336;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            z-index: 3;
         }
-        .admin-link:hover {
+        .menu-btn div {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            margin: 5px 0;
+            transition: 0.4s;
+        }
+        .menu-content {
+            display: none;
+            position: absolute;
+            top: 60px;
+            right: 20px;
+            background-color: #f44336;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            z-index: 4;
+        }
+        .menu-content a {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+        .menu-content a:hover {
             background-color: #e53935;
         }
     </style>
@@ -131,7 +162,14 @@ $bibite = array_filter($products, function($product) {
 <body>
     <div class="container">
         <h1>Bar WebApp</h1>
-        <a href="admin.php" class="admin-link">Admin Area</a>
+        <button class="menu-btn" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </button>
+        <div class="menu-content" id="menu-content">
+            <a href="admin.php">Admin Area</a>
+        </div>
         <form method="POST" action="cart.php">
             <div class="products-container">
                 <div class="product-type">
@@ -174,6 +212,15 @@ $bibite = array_filter($products, function($product) {
     </div>
 
     <script>
+        function toggleMenu() {
+            var menu = document.getElementById("menu-content");
+            if (menu.style.display === "block") {
+                menu.style.display = "none";
+            } else {
+                menu.style.display = "block";
+            }
+        }
+
         function filterProducts(type) {
             var filterInput = document.getElementById(type + '-filter').value.toLowerCase();
             var productList = document.getElementById(type + '-list');
