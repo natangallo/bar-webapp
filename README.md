@@ -54,7 +54,7 @@ Benvenuti nel pannello di amministrazione per la gestione dei prodotti. Questo s
 - **URL di Login**: `http://localhost/admin-panel/login.php`
 - **Credenziali di Default**:
   - **Username**: admin
-  - **Password**: admin123
+  - **Password**: admin_password
 
 ### Struttura dei File
 
@@ -63,6 +63,7 @@ Benvenuti nel pannello di amministrazione per la gestione dei prodotti. Questo s
 - **`transactions.php`**: Pagina per visualizzare tutte le transazioni.
 - **`db.php`**: File di configurazione del database.
 - **`css/admin-styles.css`**: File di stili CSS per il pannello di amministrazione.
+- **`css/styles.css`**: File di stili CSS per la pagina principale.
 - **`logout.php`**: Script per gestire il logout dell'amministratore.
 
 ### Funzionamento del Codice
