@@ -116,6 +116,9 @@ button:hover {
 .edit-mode .static-fields {
     display: none;
 }
+.editable {
+    background-color: white;
+}
 .add-product-form {
     display: flex;
     flex-wrap: wrap;
