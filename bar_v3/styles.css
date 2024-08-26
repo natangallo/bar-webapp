@@ -1,0 +1,460 @@
+/* Stili generali */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    padding-top: 60px; /* Aggiungi spazio superiore per l'header fisso */
+
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 70px;
+}
+
+header {
+    position: fixed; /* Fissa l'intestazione in alto */
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background-color: #ffffff; /* Colore di sfondo bianco */
+    border-bottom: 2px solid #ddd; /* Bordo inferiore per l'header */
+    z-index: 1000; /* Mantieni l'header sopra altri elementi */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px; /* Aggiungi un po' di padding per l'header */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Aggiungi una leggera ombra */
+}
+
+/* Stili generali per il menu */
+nav {
+    position: relative;
+    margin-right: 50px
+}
+
+#menu-toggle {
+    background: red;
+    right: 100;
+    border: none;
+    font-size: 1.5em;
+    color: #fff; /* Colore del testo bianco */
+    cursor: pointer;
+    padding: 8px 12px; /* Aggiungi padding per il pulsante */
+    border-radius: 5px; /* Aggiungi angoli arrotondati */}
+
+#menu {
+    list-style-type: none;
+    padding: 0;
+    position: absolute;
+    top: 50px; /* Regola la posizione verticale */
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: none; /* Inizialmente nascosto */
+    flex-direction: column; /* Assicura che gli elementi siano disposti in una colonna */
+    z-index: 1000; /* Posiziona il menu sopra altri elementi */
+}
+
+#menu li {
+    margin: 0;
+}
+
+#menu a {
+    display: block;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #000;
+}
+
+#menu a:hover {
+    background-color: #f0f0f0;
+}
+
+.hidden {
+    display: none;
+}
+
+#menu.show {
+    display: flex;
+}
+
+/* Stili per la sezione prodotti */
+#prodotti-section {
+    width: 100%;
+    max-width: 1200px; /* Aumenta la larghezza massima per adattarsi alla griglia */
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+#prodotti-lista {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Griglia responsiva */
+    gap: 15px; /* Spazio tra i pulsanti */
+}
+
+.product-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f9f9f9; /* Colore di sfondo dei prodotti */
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.product-item:nth-child(odd) {
+    background-color: #e0e0e0; /* Alterna il colore di sfondo */
+}
+
+/* Aggiungi stili per le categorie di prodotti */
+.category-blue {
+    background: linear-gradient(to bottom, #4a90e2, #003c71); /* Gradiente blu */
+}
+
+.category-blue-light {
+    background: linear-gradient(to bottom, #4a90e2, #1c4f8c); /* Gradiente blu chiaro */
+}
+
+.category-purple {
+    background: linear-gradient(to bottom, #9b59b6, #5b2c6f); /* Gradiente viola */
+}
+
+.category-purple-light {
+    background: linear-gradient(to bottom, #9b59b6, #6c3483); /* Gradiente viola chiaro */
+}
+
+/* Aggiungi uno stile lucido */
+.product-item button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-item button:hover {
+    background-color: #0056b3;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+
+/* Stili per la sezione carrello */
+#carrello {
+    font-size: 1.2em;
+}
+
+#carrello-section {
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: 20px;
+}
+
+#carrello-lista {
+    list-style-type: none;
+    padding: 0;
+}
+
+.carrello-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#search {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/* Stili per Pagina di Login */
+#login-container {
+    width: 300px;
+    margin: 100px auto;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px; /* Aggiungi angoli arrotondati per una migliore estetica */
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px; /* Spazio sotto il titolo */
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px; /* Aggiungi angoli arrotondati agli input */
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px; /* Aumenta la dimensione del testo per una migliore leggibilità */
+    transition: background-color 0.3s ease; /* Aggiungi transizione per effetto hover */
+}
+
+button:hover {
+    background-color: #218838; /* Colore di sfondo al passaggio del mouse */
+}
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Stili per il carrello */
+#carrello {
+    font-size: 1.2em;
+}
+
+#prodotti-section, #carrello-section {
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: 20px;
+}
+
+#prodotti-lista, #carrello-lista {
+    list-style-type: none;
+    padding: 0;
+}
+
+.product-item, .carrello-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#search {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/* Stili per checkout.html */
+#carrello-summary {
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: 20px;
+}
+
+#clienti-lista {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.cliente-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px; /* Spazio tra gli elementi della lista */
+    padding: 10px; /* Padding per ogni elemento cliente */
+    border: 1px solid #ddd; /* Bordo sottile per ogni elemento cliente */
+    border-radius: 5px; /* Angoli arrotondati */
+    background-color: #f9f9f9; /* Colore di sfondo per ogni elemento cliente */
+}
+
+.cliente-item button {
+    padding: 5px 10px;
+    border: none;
+    background-color: #007bff; /* Colore di sfondo del bottone */
+    color: white; /* Colore del testo del bottone */
+    border-radius: 3px; /* Angoli arrotondati del bottone */
+    cursor: pointer; /* Cursore a mano per il bottone */
+    transition: background-color 0.3s ease; /* Transizione per il cambio di colore del bottone */
+}
+
+.cliente-item button:hover {
+    background-color: #0056b3; /* Colore di sfondo del bottone al passaggio del mouse */
+}
+
+/* Stili per la pagina prodotti */
+textarea {
+    width: 100%;
+    height: 100px;
+    margin-bottom: 10px;
+}
+
+form input, form button {
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* Stile per la tabella delle transazioni */
+#transazioni-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+#transazioni-table th, #transazioni-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+#transazioni-table th {
+    cursor: pointer;
+    background-color: #f2f2f2;
+}
+
+/* Stile per l'input di ricerca */
+#search-transazioni {
+    margin-top: 20px;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Stile per la pagina clienti */
+#clienti-lista {
+    margin-top: 20px;
+}
+
+#clienti-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#clienti-table th, #clienti-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+#clienti-table th {
+    background-color: #f2f2f2;
+}
+
+#form-sezione, #form-categoria-sezione {
+    margin-top: 20px;
+}
+
+#form-sezione label, #form-categoria-sezione label {
+    display: block;
+    margin-top: 10px;
+}
+
+#form-sezione input, #form-categoria-sezione input, #form-categoria-sezione select {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+#csv-input {
+    width: 100%;
+    height: 100px;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+/* Stili per Dashboard Utenti */
+
+#saldo {
+    text-align: center;
+    margin: 20px 0;
+}
+
+#saldo h2 {
+    font-size: 24px;
+    color: #333;
+}
+
+#saldo-valore {
+    font-size: 48px;  /* Aumenta la dimensione del font */
+    font-weight: bold; /* Rende il testo più spesso */
+    color: #2a9d8f;    /* Cambia il colore per un maggiore contrasto */
+    background-color: #f4a261; /* Aggiungi uno sfondo per evidenziarlo */
+    padding: 20px;     /* Aggiungi padding per distanziare il testo dai bordi */
+    border-radius: 10px; /* Rendi gli angoli arrotondati */
+}
+
+#grafico-prodotti {
+    width: 100%; /* Occupa tutta la larghezza disponibile */
+    max-width: 600px; /* Limita la larghezza massima */
+    margin: 0 auto; /* Centra il grafico */
+}
+
+#grafico-prodotti canvas {
+    width: 100% !important; /* Assicurati che il canvas sia responsivo */
+    height: auto !important; /* Mantieni l'aspetto corretto */
+}
+
+/* Stili per il footer */
+footer {
+    background-color: #f1f1f1;
+    padding: 20px;
+    text-align: center;
+    border-top: 1px solid #ddd;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+footer p {
+    margin: 0;
+    font-size: 0.9em;
+    color: #555;
+}
+
+.footer-nav {
+    display: flex;
+    gap: 20px;
+}
+
+.footer-link {
+    color: #007bff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    font-size: 1em;
+}
+
+.footer-link:hover {
+    text-decoration: underline;
+}
+
+.footer-icon {
+    font-size: 1.2em;
+    margin-right: 8px;
+}
