@@ -58,8 +58,8 @@ Al primo accesso, l'utente sarà indirizzato alla procedura di cambio password.
 Tramite questo box è possibile aggiungere in bulk (massivamente) più clienti. Per fare ciò è sufficiente copiare una tabella di excel che contenga tre colonne, in riferimento a nome, stanza e categoria del cliente. Dopo avere incollato il testo nella casella, è sufficiente cliccare sul relativo pulsante di conferma per concludere l'operazione, che genererà quindi l'aggiunta dei clienti. 
 
 Note importanti per l'inserimento dei dati da CSV:
-  Non Usare spazi prima o dopo la virgola. Diversamente potranno generarsi duplicati.
-  Viene fatta la verifica di utenti esistenti in base al connubio di nome e stanza:
+Non Usare spazi prima o dopo la virgola. Diversamente potranno generarsi duplicati.
+Viene fatta la verifica di utenti esistenti in base al connubio di nome e stanza:
     - Se il numero di stanza cambia, viene creato un nuovo cliente.
     - Se la categoria cambia, il cliente rimane lo stesso, e viene aggiunta la categoria a quella precedente. Il cliente avrà quindi due o più categorie assegnate.
 
@@ -71,6 +71,5 @@ Al salvataggio delle modifiche, si verrà reindirizzati alla pagina dell'elenco 
 
 ## Note:
 "Funzionalità Self-Service non fornite in questa versione (solo tramite mofifica diretta al database):"
-1. Aggiornare i dati qualora già esistenti, durante l'aggiunta di nuovi prodotti. Ciò significa che l'aggiunta di prodotto, nel caso fosse già esistente, creerà di fatto un elemento duplicato. Questo non generà una incosistenza nel sistema in quanto viene utilizzato come valore sommatore per sottrarre credito al saldo dei clienti, ma semplicemente si avrà un prodotto ridondante all'elenco.
-2. Non è possibile eliminare un prodotto qualora non sia utile o ridondante. Nel caso il prodotto non sia utile, può essere rinominato, o modificare la categoria con una nomenclatura non compresa (bibite, gelati), ottenendo così il colore Grigio, nella visualizzazione di Cassa.
-3. Non è possibile modificare o eliminare cateogorie dei clienti.
+1. Non è possibile eliminare un prodotto qualora non sia utile o ridondante. Nel caso il prodotto non sia utile, può essere rinominato, o modificare la categoria con una nomenclatura non compresa (bibite, gelati), ottenendo così il colore Grigio, nella visualizzazione di Cassa.
+2. Non è possibile modificare o eliminare cateogorie dei clienti.
