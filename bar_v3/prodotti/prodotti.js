@@ -105,49 +105,57 @@ document.getElementById('salva-modifica').addEventListener('click', function() {
 
 
 
-    // Gestione dell'aggiunta di un nuovo prodotto
-    aggiungiProdottoForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-        const nome = document.getElementById('nome-prodotto').value;
-        const prezzo = document.getElementById('prezzo-prodotto').value;
-        const categoria = document.getElementById('categoria-prodotto').value;
+// Aggiungi prodotto tramite form
+aggiungiProdottoForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    const nome = document.getElementById('nome-prodotto').value;
+    const prezzo = document.getElementById('prezzo-prodotto').value;
+    const categoria = document.getElementById('categoria-prodotto').value;
 
+    fetch('aggiungi_prodotti.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nome, prezzo, categoria })
+    })
+    .then(response => response.json())
+    .then(result => {
+        if (result.success) {
+            alert('Prodotto aggiunto!');
+            caricaProdotti();
+        } else {
+            alert('Errore durante l\'aggiunta del prodotto.');
+        }
+    });
+});
+
+// Gestione dell'aggiunta massiva tramite CSV
+aggiungiCsvButton.addEventListener('click', function () {
+    const csvData = csvInput.value.trim();
+    if (csvData) {
         fetch('aggiungi_prodotti.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ nome, prezzo, categoria })
+            body: JSON.stringify({ csv: csvData })
         })
         .then(response => response.json())
         .then(result => {
             if (result.success) {
-                alert('Prodotto aggiunto!');
+                alert('Prodotti aggiunti da CSV!');
                 caricaProdotti();
             } else {
-                alert('Errore durante l\'aggiunta del prodotto.');
+                alert('Errore durante l\'aggiunta dei prodotti: ' + result.message);
             }
+        })
+        .catch(error => {
+            console.error('Errore durante l\'aggiunta dei prodotti:', error);
+            alert('Errore durante l\'aggiunta dei prodotti.');
         });
-    });
+    } else {
+        alert('Nessun dato CSV fornito.');
+    }
+});
 
-    // Gestione dell'aggiunta massiva tramite CSV
-    aggiungiCsvButton.addEventListener('click', function () {
-        const csvData = csvInput.value.trim();
-        if (csvData) {
-            fetch('aggiungi_prodotti_csv.php', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ csv: csvData })
-            })
-            .then(response => response.json())
-            .then(result => {
-                if (result.success) {
-                    alert('Prodotti aggiunti da CSV!');
-                    caricaProdotti();
-                } else {
-                    alert('Errore durante l\'aggiunta dei prodotti.');
-                }
-            });
-        }
-    });
+
 
     // Torna alla pagina index
     tornaIndexButton.addEventListener('click', function () {

@@ -16,9 +16,20 @@ include '../../accesso/session.php';
         <header>
             <h1>Modifica Cliente</h1>
             <nav>
+                <button id="menu-toggle" aria-label="Apri menu">☰</button>
+                <ul id="menu" class="hidden">
                 <?php include '../../include/menu.php'; ?>
+                </ul>
             </nav>
         </header>
+        
+        <aside class="sidebar">
+            <nav class="menu">
+            	<ul >
+               		<?php include '../../include/menu.php'; ?>
+               	</ul>
+            </nav>
+        </aside>
         
         <section id="modifica-cliente">
             <h2>Dettagli Cliente</h2>

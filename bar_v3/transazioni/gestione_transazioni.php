@@ -15,11 +15,23 @@ include '../accesso/session.php';
 <body>
     <div class="container">
         <header>
-            <h1>Transazioni</h1>
+            <h1>Storico Transazioni</h1>
             <nav>
+                <button id="menu-toggle" aria-label="Apri menu">☰</button>
+                <ul id="menu" class="hidden">
                 <?php include '../include/menu.php'; ?>
+                </ul>
             </nav>
         </header>
+        
+        <aside class="sidebar">
+            <nav class="menu">
+            	<ul >
+               		<?php include '../include/menu.php'; ?>
+               	</ul>
+            </nav>
+        </aside>
+        
         <input type="text" id="search-transazioni" placeholder="Cerca per nome cliente...">
         <table id="transazioni-table">
             <thead>

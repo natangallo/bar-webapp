@@ -35,13 +35,18 @@ foreach ($rows as $row) {
         }
 
         // Verifica se il cliente esiste già (case-insensitive per il nome)
-        $query = "SELECT id FROM clienti WHERE LOWER(nome) = ? AND numero_stanza = ?";
+        $query = "SELECT id FROM clienti WHERE LOWER(nome) = ?";
         $stmt = $pdo->prepare($query);
-        $stmt->execute([strtolower($nome), $numeroStanza]);
+        $stmt->execute([strtolower($nome)]);
         $cliente = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($cliente) {
             $clienteId = $cliente['id'];
+
+            // Aggiorna il numero di stanza del cliente esistente
+            $query = "UPDATE clienti SET numero_stanza = ? WHERE id = ?";
+            $stmt = $pdo->prepare($query);
+            $stmt->execute([$numeroStanza, $clienteId]);
 
             // Verifica se il cliente è già associato alla categoria
             $query = "SELECT * FROM clienti_categorie WHERE cliente_id = ? AND categoria_id = ?";
@@ -71,3 +76,4 @@ foreach ($rows as $row) {
 }
 
 echo json_encode(['success' => true]);
+?>

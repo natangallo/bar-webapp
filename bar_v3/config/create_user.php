@@ -36,8 +36,8 @@ foreach ($clienti as $cliente) {
     if ($exists == 0) {
         try {
             // Inserisce un nuovo utente
-            $queryInsertUser = "INSERT INTO utenti (username, password, cliente_id, ruolo) 
-                                VALUES (?, ?, ?, 'user')";
+            $queryInsertUser = "INSERT INTO utenti (username, password, cliente_id, ruolo, password_expired) 
+                                VALUES (?, ?, ?, 'user', '1')";
             $stmtInsertUser = $pdo->prepare($queryInsertUser);
             
             // Cripta la password

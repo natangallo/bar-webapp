@@ -13,14 +13,21 @@ document.addEventListener('DOMContentLoaded', function () {
         menu.classList.toggle('show');
     });
     
+    // Carica l'ultima categoria selezionata dal localStorage
+    const savedCategoriaId = localStorage.getItem('selectedCategoria');
+    if (savedCategoriaId) {
+        categoriaFilter.value = savedCategoriaId;
+    }
 
     // Carica clienti e categorie
-    fetchClienti();
+    fetchClienti(categoriaFilter.value);
     fetchCategorie();
 
     // Filtra i clienti in base alla categoria
     categoriaFilter.addEventListener('change', function () {
-        fetchClienti(this.value);
+        const selectedCategoria = this.value;
+        localStorage.setItem('selectedCategoria', selectedCategoria);  // Salva la categoria selezionata
+        fetchClienti(selectedCategoria);
     });
 
     // Cerca clienti in tempo reale
@@ -67,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         formData.append('categoria', selectedCategories);  // Aggiungi le categorie come array di nomi
 
-        fetch('aggiungiCliente.php', {
+        fetch('updateClienti.php', {
             method: 'POST',
             body: formData
         })
@@ -106,7 +113,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('importa-csv-btn').addEventListener('click', function () {
         const csvData = csvInput.value.trim();
 
-        fetch('importaClientiCSV.php', {
+        fetch('updateClienti.php', {
             method: 'POST',
             body: JSON.stringify({ csv: csvData }),
             headers: {
@@ -141,31 +148,36 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
             });
     }
-    
-    
+
     // Funzione per caricare categorie
     function fetchCategorie() {
         fetch('getCategorie.php')
             .then(response => response.json())
             .then(data => {
-            const categoriaSelect = document.getElementById('categoria');
-            const categoriaFilter = document.getElementById('categoria-filter');
+                const categoriaSelect = document.getElementById('categoria');
+                const categoriaFilter = document.getElementById('categoria-filter');
 
-            categoriaSelect.innerHTML = '';
-            categoriaFilter.innerHTML = '<option value="">Tutte le categorie</option>';
+                categoriaSelect.innerHTML = '';
+                categoriaFilter.innerHTML = '<option value="">Tutte le categorie</option>';
 
-            data.categorie.forEach(categoria => {
-                const option = document.createElement('option');
-                option.value = categoria.id;
-                option.textContent = categoria.nome;
-                categoriaSelect.appendChild(option);
+                data.categorie.forEach(categoria => {
+                    const option = document.createElement('option');
+                    option.value = categoria.id;
+                    option.textContent = categoria.nome;
+                    categoriaSelect.appendChild(option);
 
-                const filterOption = document.createElement('option');
-                filterOption.value = categoria.id;
-                filterOption.textContent = categoria.nome;
-                categoriaFilter.appendChild(filterOption);
+                    const filterOption = document.createElement('option');
+                    filterOption.value = categoria.id;
+                    filterOption.textContent = categoria.nome;
+                    categoriaFilter.appendChild(filterOption);
+                });
+
+                // Se c'è un ID di categoria salvato, selezioniamo quella categoria nel filtro
+                if (savedCategoriaId) {
+                    categoriaFilter.value = savedCategoriaId;
+                    fetchClienti(savedCategoriaId);
+                }
             });
-        });
     }
 
     // Funzione per modificare cliente (apri una nuova pagina associata al profilo del cliente)

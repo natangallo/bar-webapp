@@ -4,19 +4,23 @@
 // Includi il file di accesso al DataBase
 include '../include/db.php';
 
-
 $nome = $_POST['nome'];
 $numeroStanza = $_POST['numero-stanza'];
 $categorie = isset($_POST['categoria']) ? $_POST['categoria'] : [];  // Assicurati che sia un array
 
 // Verifica se il cliente esiste già (case-insensitive per il nome)
-$query = "SELECT id FROM clienti WHERE LOWER(nome) = ? AND numero_stanza = ?";
+$query = "SELECT id FROM clienti WHERE LOWER(nome) = ?";
 $stmt = $pdo->prepare($query);
-$stmt->execute([strtolower($nome), $numeroStanza]);
+$stmt->execute([strtolower($nome)]);
 $cliente = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if ($cliente) {
     $clienteId = $cliente['id'];
+
+    // Aggiorna il numero di stanza del cliente esistente
+    $query = "UPDATE clienti SET numero_stanza = ? WHERE id = ?";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([$numeroStanza, $clienteId]);
 } else {
     // Se il cliente non esiste, inseriscilo nel database
     $query = "INSERT INTO clienti (nome, numero_stanza) VALUES (?, ?)";
@@ -65,3 +69,4 @@ foreach ($categorie as $categoriaNome) {
 }
 
 echo json_encode(['success' => true, 'message' => 'Cliente salvato con successo']);
+?>

@@ -19,7 +19,7 @@ $clienteId = isset($_GET['id']) ? intval($_GET['id']) : $_SESSION['user_id'];
 <body>
     <div class="container">
         <header>
-            <h1>Benvenuto, <!-- Il nome dell'utente sarà inserito qui da JavaScript -->!</h1>
+            <h1><!-- Il nome dell'utente sarà inserito qui da JavaScript --></h1>
         </header>
         <main>
             <!-- Mostra il saldo -->

@@ -17,8 +17,8 @@ if (!isset($_SESSION['user_id'])) {
 // Verifica il ruolo dell'utente
 if ($_SESSION['user_role'] === 'user') {
     // L'utente è un cliente, può accedere solo alla dashboard
-    if (basename($_SERVER['PHP_SELF']) !== 'index.php') { // in qualsiasi caso rimane invariato il path
-        header('Location: ../cassabar/dashboard/index.php');
+    if (basename($_SERVER['PHP_SELF']) !== 'utenti.php') { // in qualsiasi caso rimane invariato il path
+        header('Location: dashboard/utenti.php');
         exit();
     }
 }

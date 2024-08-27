@@ -16,12 +16,23 @@ include '../accesso/session.php';
 <body>
     <div class="container">
         <header>
-            <h1>Checkout</h1>
+            <h1>Gestione Clienti</h1>
             <nav>
+                <button id="menu-toggle" aria-label="Apri menu">☰</button>
+                <ul id="menu" class="hidden">
                 <?php include '../include/menu.php'; ?>
+                </ul>
             </nav>
-
         </header>
+        
+        <aside class="sidebar">
+            <nav class="menu">
+            	<ul >
+               		<?php include '../include/menu.php'; ?>
+               	</ul>
+            </nav>
+        </aside>
+        
         <section id="checkout-section">
             <h2>Riepilogo Acquisti</h2>
             <div id="carrello-riepilogo"></div>

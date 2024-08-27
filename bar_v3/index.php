@@ -18,21 +18,34 @@ include 'accesso/session.php';
         <header class="header">
             <h1>Cassa Bar</h1>
             <nav>
+                <button id="menu-toggle" aria-label="Apri menu">☰</button>
+                <ul id="menu" class="hidden">
                 <?php include 'include/menu.php'; ?>
+                </ul>
             </nav>
         </header>
-        <div id="carrello">
+        <aside class="sidebar">
+            <nav class="menu">
+            	<ul >
+               		<?php include 'include/menu.php'; ?>
+               	</ul>
+            </nav>
+        </aside>
+		
+        <section id="carrello">
                 <span>Carrello:</span>
                 <span id="totale">€0.00</span>
-        </div>
-        <section id="prodotti-section">
+        </section>
+        <section>
             <input type="text" id="search" placeholder="Cerca un prodotto...">
+        </section>
+        <section id="prodotti-section">
             <div id="prodotti-lista"></div>
         </section>
         <section id="carrello-section">
             <h2>Carrello</h2>
-            <ul id="carrello-lista"></ul>
             <button id="checkout">Checkout</button>
+            <ul id="carrello-lista"></ul>
         </section>
     </div>
     <script src="include/menu.js"></script>

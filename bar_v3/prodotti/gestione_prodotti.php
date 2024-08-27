@@ -16,9 +16,21 @@ include '../accesso/session.php';
         <header>
             <h1>Gestione Prodotti</h1>
             <nav>
+                <button id="menu-toggle" aria-label="Apri menu">☰</button>
+                <ul id="menu" class="hidden">
                 <?php include '../include/menu.php'; ?>
+                </ul>
             </nav>
         </header>
+        
+        <aside class="sidebar">
+            <nav class="menu">
+            	<ul >
+               		<?php include '../include/menu.php'; ?>
+               	</ul>
+            </nav>
+        </aside>
+        
         <section id="gestione-prodotti">
             <h2>Prodotti Esistenti</h2>
             <div id="prodotti-lista"></div>
@@ -40,13 +52,17 @@ include '../accesso/session.php';
             <form id="aggiungi-prodotto">
                 <input type="text" id="nome-prodotto" placeholder="Nome prodotto" required>
                 <input type="number" id="prezzo-prodotto" step="0.01" placeholder="Prezzo prodotto" required>
-                <input type="text" id="categoria-prodotto" placeholder="Categoria prodotto" required>
+                <input type="text" id="categoria-prodotto" placeholder="Categoria prodotto (gelati, bibite)" required>
                 <button type="submit">Aggiungi Prodotto</button>
             </form>
 
             <h2>Aggiungi Prodotti da CSV</h2>
             <textarea id="csv-input" placeholder="Incolla il CSV qui... 'nome,prezzo,categoria'"></textarea>
             <button id="aggiungi-csv">Aggiungi Prodotti da CSV</button>
+            <section>
+            <p>Note importanti per l'inserimento dei dati da CSV: <br>- Non Usare spazi prima o dopo la virgola.</p>
+            </section>
+
         </section>
         <button id="torna-index">Torna alla Home</button>
     </div>

@@ -11,8 +11,9 @@ body {
 .container {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: 70px;
+    align-items: top; /* posiziona i blocchi section del codice html */
+    padding: 60px;
+
 }
 
 header {
@@ -31,27 +32,30 @@ header {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Aggiungi una leggera ombra */
 }
 
+
 /* Stili generali per il menu */
 nav {
     position: relative;
-    margin-right: 50px
+    margin-right: 40px /* Sposta il blocco nav del codice html */
 }
 
 #menu-toggle {
     background: red;
-    right: 100;
     border: none;
     font-size: 1.5em;
-    color: #fff; /* Colore del testo bianco */
+    color: #fff;
     cursor: pointer;
-    padding: 8px 12px; /* Aggiungi padding per il pulsante */
-    border-radius: 5px; /* Aggiungi angoli arrotondati */}
+    padding: 7px 12px; /* Imposta la dimensione del tasto menu */
+    border-radius: 5px;
+    display: none; /* Nascondi per schermi grandi */
+
+}
 
 #menu {
     list-style-type: none;
-    padding: 0;
+    padding: 90;
     position: absolute;
-    top: 50px; /* Regola la posizione verticale */
+    top: 950px; /* Regola la posizione verticale */
     right: 0;
     background-color: #fff;
     border: 1px solid #ccc;
@@ -82,32 +86,156 @@ nav {
 
 #menu.show {
     display: flex;
+    flex-direction: column;
+        position: absolute;
+        top: 50px;
+        right: 0;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        z-index: 1000;
+}
+
+/* Barra laterale (sidebar) */
+.sidebar {
+    display: none; /* Nascondi per schermi piccoli */
+    width: 150px;
+    background-color: #f4f4f4;
+    padding-top: 10px;
+/*    box-sizing: border-box;*/
+    position: fixed;
+    height: 100%;
+    top: 100px;
+    left: 0;
+
+}
+
+.menu {
+/*    margin-top: 50px; /* Spazio dalla parte superiore */
+	list-style-type: none; /* Rimuove i punti elenco */
+	width: 100%
+}
+
+.menu ul {
+    
+    padding: 0; /* Rimuove il padding interno */
+    margin: 0;
+}
+
+.menu ul li {
+    margin: 20px 0; /* Spazio verticale tra gli elementi */
+    padding-left: 20px; /* Spazio tra il testo e il bordo sinistro */
+    display: flex;
+    align-items: center;
+}
+
+.menu ul li a {
+    text-decoration: none; /* Rimuove la sottolineatura dei link */
+    color: #333; /* Testo nero */
+    width: 100%;
+    font-size: 20px; /* Dimensione del testo */
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    box-sizing: border-box;
+/*    display: block;*/
+    width: 100%;
+
+}
+
+.menu ul li a:hover {
+    background-color: #d1d1d1; /* Colore di sfondo al passaggio del mouse */
+}
+
+.menu ul li.active a {
+    background-color: #0071CE; /* Colore di sfondo per l'elemento selezionato */
+    color: #fff;
+}
+
+.menu ul li a:focus, .menu ul li a:active {
+    background-color: #0071CE;
+    color: #fff;
+    outline: none;
+}
+
+.menu ul li a::before {
+/*    content: '\2022'; /* Punto elenco personalizzato */
+    margin-right: 1px;
+    font-size: 20px;
+}
+
+
+
+/* Media query per schermi più grandi */
+@media (min-width: 768px) {
+    #menu-toggle {
+        display: none;
+    }
+
+    .sidebar {
+        display: block;
+    }
+
+	.container {
+        margin-left: 120px; /* Margine per fare spazio alla sidebar */
+        
+    }
+
+    #prodotti-section, #carrello-section {
+        margin-left: 20px; /* Margine per fare spazio alla sidebar */
+        display: block;
+	    flex-direction: row;	
+	    width: 100%;
+	}
+
+}
+
+/* Media query per schermi più piccoli */
+@media (max-width: 767px) {
+    #menu-toggle {
+        display: block;
+    }
+
+    .container {
+    	display: block;
+
+	    align-items: center;
+	    padding: 70px;
+	}
+
 }
 
 /* Stili per la sezione prodotti */
 #prodotti-section {
     width: 100%;
-    max-width: 1200px; /* Aumenta la larghezza massima per adattarsi alla griglia */
+    max-width: 2200px; /* Aumenta la larghezza massima per adattarsi alla griglia */
     margin-bottom: 20px;
-    padding: 10px;
+    padding: 0px;
+    position: relative;
+	top: 0;
+
 }
 
 #prodotti-lista {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Griglia responsiva */
-    gap: 15px; /* Spazio tra i pulsanti */
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Griglia responsiva */
+    gap: 5px; /* Spazio tra i pulsanti */
+    
 }
 
 .product-item {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: top;
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 10px;
     background-color: #f9f9f9; /* Colore di sfondo dei prodotti */
     text-align: center;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: relative;
+	top: 0;
+
 }
 
 .product-item:nth-child(odd) {
@@ -150,13 +278,13 @@ nav {
 
 /* Stili per la sezione carrello */
 #carrello {
-    font-size: 1.2em;
+    font-size: 120.2em;
 }
 
 #carrello-section {
     width: 100%;
-    max-width: 600px;
-    margin-bottom: 20px;
+    max-width: 2200px; /* Aumenta la larghezza massima per adattarsi alla griglia */
+    margin-bottom: 1px;
 }
 
 #carrello-lista {
@@ -167,10 +295,10 @@ nav {
 .carrello-item {
     display: flex;
     justify-content: space-between;
-    padding: 10px;
+    padding: 0px;
     margin: 5px 0;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 305px;
 }
 
 #search {
@@ -237,7 +365,7 @@ button:disabled {
 
 #prodotti-section, #carrello-section {
     width: 100%;
-    max-width: 600px;
+    max-width: 1600px;
     margin-bottom: 20px;
 }
 
@@ -429,6 +557,7 @@ footer {
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
+    
 }
 
 footer p {
@@ -440,6 +569,7 @@ footer p {
 .footer-nav {
     display: flex;
     gap: 20px;
+        left: 150px;
 }
 
 .footer-link {
