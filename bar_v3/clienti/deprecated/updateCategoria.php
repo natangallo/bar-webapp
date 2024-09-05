@@ -18,3 +18,5 @@ if ($stmt->execute([$nome, $id])) {
     echo json_encode(['success' => false]);
 }
 ?>
+
+
