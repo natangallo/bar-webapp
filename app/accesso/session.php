@@ -34,6 +34,7 @@ if (isset($_SESSION['login_attempts']) && $_SESSION['login_attempts'] >= 5) {
 }
 
 // Aggiungi altre verifiche o logiche relative alla sessione, se necessario
-define('BASE_URL', 'http://localhost:8888/cassabar/');
-
+// define('BASE_URL', 'http://localhost:8888/');
+// define('BASE_URL', 'http://192.168.178.178:8888/');
+define('BASE_URL', 'http://cassabar.freeddns.it/');
 ?>

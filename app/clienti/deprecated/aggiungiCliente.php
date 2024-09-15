@@ -4,6 +4,7 @@
 // Includi il file di accesso al DataBase
 include '../include/db.php';
 
+
 $nome = $_POST['nome'];
 $numeroStanza = $_POST['numero-stanza'];
 $categorie = isset($_POST['categoria']) ? $_POST['categoria'] : [];  // Assicurati che sia un array

@@ -6,10 +6,10 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 // Configurazione del database
-$host = 'localhost';
+$host = 'mysql';
 $dbname = 'bar_db';
-$username = 'root';
-$password = 'root';
+$username = 'barmysqluser';
+$password = 'OçpbrIsomhYjod';
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
