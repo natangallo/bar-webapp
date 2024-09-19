@@ -1,3 +1,5 @@
+// clienti/clienti.js
+
 document.addEventListener('DOMContentLoaded', function () {
     const searchInput = document.getElementById('search-clienti');
     const categoriaFilter = document.getElementById('categoria-filter');
@@ -63,6 +65,35 @@ document.addEventListener('DOMContentLoaded', function () {
         categoriaForm.reset();
     });
 
+    // Funzione per gestire la visualizzazione del popup
+    function showPopup(output) {
+    
+        const popup = document.createElement('div');
+        popup.classList.add('popup');
+        popup.innerHTML = `
+            <div class="popup-content">
+                <span class="close-popup">&times;</span>
+                <h3>Creazione utenti completata</h3>
+                <pre>${output}</pre>
+            </div>
+        `;
+        document.body.appendChild(popup);
+
+        // Gestisci la chiusura del popup
+        const closeBtn = popup.querySelector('.close-popup');
+        closeBtn.addEventListener('click', function () {
+            popup.remove();
+        });
+
+        // Chiudi cliccando fuori dal popup
+        popup.addEventListener('click', function (e) {
+            if (e.target === popup) {
+                popup.remove();
+            }
+        });
+    }
+
+
     // Gestisci l'invio del modulo cliente
     clienteForm.addEventListener('submit', function (e) {
         e.preventDefault();
@@ -83,6 +114,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (data.success) {
                 fetchClienti();
                 document.getElementById('form-sezione').style.display = 'none';
+                showPopup(data.output); // Mostra il popup con l'output
             } else {
                 alert('Errore durante l\'aggiunta del cliente.');
             }
@@ -125,6 +157,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (data.success) {
                 fetchClienti();
                 csvInput.value = '';
+                showPopup(data.output); // Mostra il popup con l'output
             } else {
                 alert('Errore durante l\'importazione del CSV.');
             }

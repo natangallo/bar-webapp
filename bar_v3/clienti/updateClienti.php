@@ -1,8 +1,8 @@
 <?php
-// gestisciClienti.php
+// updateClienti.php
 
-// Includi il file di accesso al DataBase
 include '../include/db.php';
+include '../config/create_user.php'; 
 
 // Funzione per gestire l'aggiunta o l'aggiornamento di un cliente
 function gestisciCliente($pdo, $nome, $numeroStanza, $categorie) {
@@ -76,24 +76,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['csv'])) {
     foreach ($rows as $row) {
         $fields = str_getcsv($row);
         if (count($fields) >= 3) {
-            $nome = $fields[0];
-            $numeroStanza = $fields[1];
-            $categoriaNome = $fields[2];
+            $nome = trim($fields[0]);
+            $numeroStanza = trim($fields[1]);
+            $categoriaNome = trim($fields[2]);
 
-            // Gestisci il cliente con la categoria dal CSV
-            gestisciCliente($pdo, $nome, $numeroStanza, [$categoriaNome]);
+            if ($nome && $numeroStanza) {
+                // Gestisci il cliente con la categoria dal CSV
+                gestisciCliente($pdo, $nome, $numeroStanza, [$categoriaNome]);
+            } else {
+                // Log o gestisci i dati mancanti
+                error_log("Nome o numero stanza mancante nella riga CSV: $row");
+            }
         }
     }
-    echo json_encode(['success' => true]);
 
-// Se si sta aggiungendo/modificando un cliente via form
+    // Aggiungi la creazione utenti dopo aver gestito i clienti
+    ob_start(); // Inizia a catturare l'output
+    include '../config/create_user.php'; // Richiama lo script per creare gli utenti
+    $output = ob_get_clean(); // Ottieni l'output
+
+    echo json_encode(['success' => true, 'message' => 'Cliente salvato con successo', 'output' => $output]);
+
 } else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nome = $_POST['nome'];
-    $numeroStanza = $_POST['numero-stanza'];
+    $nome = isset($_POST['nome']) ? trim($_POST['nome']) : null;
+    $numeroStanza = isset($_POST['numero-stanza']) ? trim($_POST['numero-stanza']) : null;
     $categorie = isset($_POST['categoria']) ? $_POST['categoria'] : [];  // Assicurati che sia un array
 
-    // Gestisci il cliente con le categorie fornite via form
-    gestisciCliente($pdo, $nome, $numeroStanza, $categorie);
-    echo json_encode(['success' => true, 'message' => 'Cliente salvato con successo']);
+    if ($nome && $numeroStanza) {
+        // Gestisci il cliente con le categorie fornite via form
+        gestisciCliente($pdo, $nome, $numeroStanza, $categorie);
+        
+        // Aggiungi la creazione utenti dopo aver gestito i clienti
+        ob_start(); // Inizia a catturare l'output
+        include '../config/create_user.php'; // Richiama lo script per creare gli utenti
+        $output = ob_get_clean(); // Ottieni l'output
+        file_put_contents('debug_output.txt', $output); // Salva l'output in un file per verificarlo
+
+        echo json_encode(['success' => true, 'message' => 'Cliente salvato con successo', 'output' => $output]);
+    } else {
+        // Gestisci l'errore: nome o numero stanza mancante
+        echo json_encode(['success' => false, 'message' => 'Nome o numero di stanza mancante']);
+    }
 }
 ?>

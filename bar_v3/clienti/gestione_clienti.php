@@ -1,4 +1,6 @@
 <?php
+// clienti/gestione_clineti.php
+
 // Includi il file per la gestione della sessione
 include '../accesso/session.php';
 
@@ -64,11 +66,11 @@ include '../accesso/session.php';
         <section id="form-sezione" style="display:none;">
             <h2 id="form-titolo">Aggiungi Singolo Cliente</h2>
             <form id="cliente-form">
-                <label for="nome">Nome:</label>
-                <input type="text" id="nome" name="nome" required>
+                <label for="nome">Nome: </label>
+                <input type="text" id="nome" name="nome" placeholder="Mario Rossi" required>
 
                 <label for="numero-stanza">Numero di Stanza:</label>
-                <input type="text" id="numero-stanza" name="numero-stanza" required>
+                <input type="text" id="numero-stanza" name="numero-stanza" placeholder="A123" required>
 
                 <label for="categoria">Categoria:</label>
                 <select id="categoria" name="categoria" multiple>
@@ -84,7 +86,7 @@ include '../accesso/session.php';
             <h2 id="form-categoria-titolo">Aggiungi Nuova Categoria</h2>
             <form id="categoria-form">
                 <label for="categoria-nome">Nome Categoria:</label>
-                <input type="text" id="categoria-nome" name="categoria-nome" required>
+                <input type="text" id="categoria-nome" name="categoria-nome" placeholder="Nome a Piacere o dato esistente" required>
 
                 <button type="submit">Salva</button>
                 <button type="button" id="annulla-categoria-form">Annulla</button>

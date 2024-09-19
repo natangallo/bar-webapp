@@ -1,18 +1,23 @@
 <?php
-// Assicurati di includere il file di connessione al database
+// config/create_user.php
 include '../include/db.php';
 
 // Funzione per generare una password sicura
-function generatePassword($clienteNome) {
-    $nome = preg_replace('/\s+/', '', strtolower($clienteNome)); // Rimuove spazi e converte in minuscolo
+if (!function_exists('generatePassword')) {
+	function generatePassword($clienteNome) {
+    	$nome = preg_replace('/\s+/', '', strtolower($clienteNome)); // Rimuove spazi e converte in minuscolo
     return $nome . '123'; // Aggiungi un suffisso numerico per maggiore sicurezza
 }
-
+}
 // Funzione per generare un username basato sul nome del cliente
-function generateUsername($clienteNome) {
+if (!function_exists('generateUsername')) {
+	function generateUsername($clienteNome) {
     $nome = preg_replace('/\s+/', '', strtolower($clienteNome)); // Rimuove spazi e converte in minuscolo
     return $nome; // Username semplice basato sul nome del cliente
 }
+}
+
+$output = ""; // Variabile per accumulare l'output
 
 // Recupera i clienti senza un utente associato
 $queryClienti = "SELECT clienti.id AS cliente_id, clienti.nome 
@@ -45,12 +50,15 @@ foreach ($clienti as $cliente) {
             
             $stmtInsertUser->execute([$username, $hashedPassword, $cliente['cliente_id']]);
             
-            echo "Utente creato: $username\n";
-        } catch (PDOException $e) {
-            echo "Errore durante l'inserimento dell'utente: " . $e->getMessage() . "\n";
-        }
-    } else {
-        echo "L'utente con username $username esiste già.\n";
-    }
+            $output .= "Utente creato: $username - Password: $password\n";
+       		} 
+	        catch (PDOException $e) {
+            $output .= "Errore durante l'inserimento dell'utente: " . $e->getMessage() . "\n";
+	        }
+		    } 
+		else {
+        $output .= "L'utente con username $username esiste già.\n";
+		}
 }
+
 ?>
